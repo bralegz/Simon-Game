@@ -5,16 +5,17 @@ var keyPressed = [];
 var level = 0;
 
 // IDENTIFICADOR DE TECLA PRESIONADA.
-$(document).on("keydown", function (event) {
+$(document).on("click", function (event) {
+    console.log(event.target.id);
     // console.log(keyPressed.length);
-    if (keyPressed.length === 0 && event.key == "a") {
+    if (keyPressed.length === 0 && event.type == "click" && event.target.id === "level-title") {
         nextSequence();
         level = 1
         $("#level-title").html("Level " + level);
     } else {
         return
     }
-    keyPressed.push(event.key)
+    keyPressed.push(event.type)
 });
 
 // ACTIVACION DEL JUEGO Y SONIDO.
@@ -79,20 +80,21 @@ $(".btn").on("click", function () {
             setTimeout(() => {
                 $("body").removeClass("game-over")
             }, 200);
-            $("h1").html("Game Over, Press Any Key to Restart")
-            startOver();
+            $("h1").html("Game Over, Click on Any Button to Restart")
             // console.log("Te equivocaste!")
             $(".btn").on("click", function () {
                 var audio = new Audio("sounds/wrong.mp3");
                 audio.play();
+                startOver();
             });
+        
         }
     };
 
 });
 
 function startOver () {
-    $(document).on("keydown", function() {
+    $(document).on("click", function() {
         location.reload();
     })
 };
