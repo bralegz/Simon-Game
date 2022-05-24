@@ -1,20 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   text-align: center;
-  background-color: #011F3F;
+  height: 100vh;
+  width: 100%;
+  background-color: #006E7F;
+  padding-top: 100px
 }
 
 #level-title {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
-  margin:  5%;
+  margin:  0 5% 5% 5%;
   color: #FEF2BF;
+}
+
+#level-title:hover, .btn {
+  cursor: pointer;
 }
 
 .container {
   display: block;
-  width: 50%;
+  width: auto;
   margin: auto;
-
 }
 
 .btn {
@@ -32,19 +44,19 @@ body {
 }
 
 .red {
-  background-color: red;
+  background-color: #EE5007;
 }
 
 .green {
-  background-color: green;
+  background-color: #B4FF9F;
 }
 
 .blue {
-  background-color: blue;
+  background-color: #5534A5;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #F8CB2E;
 }
 
 .pressed {

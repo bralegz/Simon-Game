@@ -80,8 +80,7 @@ $(".btn").on("click", function () {
             setTimeout(() => {
                 $("body").removeClass("game-over")
             }, 200);
-            $("h1").html("Game Over, Click on Any Button to Restart")
-            // console.log("Te equivocaste!")
+            $("h1").html("Game Over")
             $(".btn").on("click", function () {
                 var audio = new Audio("sounds/wrong.mp3");
                 audio.play();
