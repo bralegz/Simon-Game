@@ -8,7 +8,8 @@ var level = 0;
 $(document).on("click", function (event) {
     console.log(event.target.id);
     // console.log(keyPressed.length);
-    if (keyPressed.length === 0 && event.type == "click" && event.target.id === "level-title") {
+    if (keyPressed.length === 0 && event.type == "click" && event.target.id === "start") {
+        $("#start").addClass("hidden");
         nextSequence();
         level = 1
         $("#level-title").html("Level " + level);
@@ -66,9 +67,11 @@ $(".btn").on("click", function () {
         userClickedPattern = [];
         level++;
         setTimeout(() => {
-            $("#level-title").html("Level " + level);
-            nextSequence();
-            console.log("You're on the level " + level)
+            if($("#restart").hasClass("hidden")) {
+                $("#level-title").html("Level " + level);
+                nextSequence();
+            // console.log("You're on the level " + level)
+            }
         }, 1000);
     } else {
         if (userClickedPattern[userClickedPattern.length - 1] === gamePattern[userClickedPattern.length - 1]) {
@@ -76,17 +79,18 @@ $(".btn").on("click", function () {
         } else {
             var audio = new Audio("sounds/wrong.mp3");
             audio.play();
+            $("#restart").removeClass("hidden");
+            $("#start").addClass("hidden");
             $("body").addClass("game-over")
             setTimeout(() => {
                 $("body").removeClass("game-over")
             }, 200);
-            $("h1").html("Game Over")
-            $(".btn").on("click", function () {
+            $("#level-title").html("Game Over")
+            $("#restart").on("click", function () {
                 var audio = new Audio("sounds/wrong.mp3");
                 audio.play();
                 startOver();
             });
-        
         }
     };
 

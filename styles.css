@@ -11,14 +11,14 @@ body {
   background-color: #006E7F;
 }
 
-#level-title, #start {
+#level-title, #start, #restart {
   font-family: 'Press Start 2P', cursive;
   font-size: 3rem;
   margin:  5% 5% 5% 5%;
   color: #FEF2BF;
 }
 
-#level-title:hover, .btn, #start {
+#level-title:hover, .btn, #start, #restart{
   cursor: pointer;
 }
 
@@ -42,6 +42,16 @@ body {
   opacity: 0.8;
 }
 
+.pressed {
+  box-shadow: 0 0 20px white;
+  background-color: grey;
+}
+
+.hidden {
+  display: none;
+}
+
+
 .red {
   background-color: #EE5007;
 }
@@ -56,9 +66,4 @@ body {
 
 .yellow {
   background-color: #F8CB2E;
-}
-
-.pressed {
-  box-shadow: 0 0 20px white;
-  background-color: grey;
 }
