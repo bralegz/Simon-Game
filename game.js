@@ -4,7 +4,7 @@ var buttonColours = ["red", "blue", "green", "yellow"];
 var keyPressed = [];
 var level = 0;
 
-// IDENTIFICADOR DE TECLA PRESIONADA.
+// IDENTIFY CLICK ON START BUTTON.
 $(document).on("click", function (event) {
     console.log(event.target.id);
     // console.log(keyPressed.length);
@@ -19,7 +19,7 @@ $(document).on("click", function (event) {
     keyPressed.push(event.type)
 });
 
-// ACTIVACION DEL JUEGO Y SONIDO.
+// GAME START AND SOUND.
 
 function nextSequence() {
     var randomNumber = Math.floor(Math.random() * 4)
@@ -34,7 +34,7 @@ function nextSequence() {
     // console.log(gamePattern);
 };
 
-// SONIDO DESPUES DEL CLICK EN CUALQUIER BOTON
+// SOUND AFTER CLICK ON ANY BUTTON
 
 function playSound() {
     $(".btn").on("click", function () {
@@ -43,7 +43,7 @@ function playSound() {
     });
 }
 
-// ANIMACION
+// ANIMATION
 
 function animatePress(currentColour) {
     $("#" + currentColour).addClass("pressed");
@@ -53,51 +53,57 @@ function animatePress(currentColour) {
     }, 100);
 };
 
-// IDENTIFICADOR DEL BOTON CLICKEADO. COMPARACION DE PATRONES DE JUEGO Y DE USUARIO.
+// IDENTIFY THE CLICKED BUTTON. COMPARE GAME PATTERN AND USER PATTERN.
 
 $(".btn").on("click", function () {
     var userChosenColour = this.id;
-    userClickedPattern.push(userChosenColour);
     animatePress(userChosenColour);
-    console.log(userClickedPattern);
+
+    if ($("#start").hasClass("hidden")) {
+        userClickedPattern.push(userChosenColour);
+        // console.log(userClickedPattern);
 
 
-    // SUBIDA DE NIVEL
-    if (JSON.stringify(gamePattern) === JSON.stringify(userClickedPattern)) {
-        userClickedPattern = [];
-        level++;
-        setTimeout(() => {
-            if($("#restart").hasClass("hidden")) {
-                $("#level-title").html("Level " + level);
-                nextSequence();
-            // console.log("You're on the level " + level)
-            }
-        }, 1000);
-    } else {
-        if (userClickedPattern[userClickedPattern.length - 1] === gamePattern[userClickedPattern.length - 1]) {
-            console.log("bien")
-        } else {
-            var audio = new Audio("sounds/wrong.mp3");
-            audio.play();
-            $("#restart").removeClass("hidden");
-            $("#start").addClass("hidden");
-            $("body").addClass("game-over")
+        // LEVEL UP
+        if (JSON.stringify(gamePattern) === JSON.stringify(userClickedPattern)) {
+            userClickedPattern = [];
+            level++;
             setTimeout(() => {
-                $("body").removeClass("game-over")
-            }, 200);
-            $("#level-title").html("Game Over")
-            $("#restart").on("click", function () {
-                var audio = new Audio("sounds/wrong.mp3");
-                audio.play();
-                startOver();
-            });
-        }
-    };
+                if ($("#restart").hasClass("hidden")) {
+                    $("#level-title").html("Level " + level);
+                    nextSequence();
+                    // console.log("You're on the level " + level)
+                }
+            }, 1000);
+        } else {
+            if (userClickedPattern[userClickedPattern.length - 1] === gamePattern[userClickedPattern.length - 1]) {
+                console.log("bien")
+            } else {
+                if ($("#start").hasClass("hidden")) {
+                    var audio = new Audio("sounds/wrong.mp3");
+                    audio.play();
+                    $("#restart").removeClass("hidden");
+                    $("#start").addClass("hidden");
+                    $("body").addClass("game-over")
+                    setTimeout(() => {
+                        $("body").removeClass("game-over")
+                    }, 200);
+                    $("#level-title").html("Game Over")
+                    $("#restart").on("click", function () {
+                        var audio = new Audio("sounds/wrong.mp3");
+                        audio.play();
+                        startOver();
+                    });
+                }
+
+            }
+        };
+    }
 
 });
 
-function startOver () {
-    $(document).on("click", function() {
+function startOver() {
+    $(document).on("click", function () {
         location.reload();
     })
 };
