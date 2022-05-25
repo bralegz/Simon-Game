@@ -38,8 +38,10 @@ function nextSequence() {
 
 function playSound() {
     $(".btn").on("click", function () {
-        let audio = new Audio("sounds/" + this.id + ".mp3");
-        audio.play();
+        if($("#start").hasClass("hidden")) {
+            let audio = new Audio("sounds/" + this.id + ".mp3");
+            audio.play();
+        }
     });
 }
 
