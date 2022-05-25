@@ -5,11 +5,15 @@
 }
 
 body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   height: 100vh;
   width: 100%;
   background-color: #006E7F;
 }
+
 
 #level-title, #start, #restart {
   font-family: 'Press Start 2P', cursive;
@@ -25,14 +29,14 @@ body {
 .container {
   display: block;
   width: auto;
-  margin: auto;
+  margin: 0 auto 0 auto;
 }
 
 .btn {
   margin: 25px;
   display: inline-block;
-  height: 200px;
-  width: 200px;
+  height: 150px;
+  width: 150px;
   border: 10px solid black;
   border-radius: 20%;
 }
@@ -66,4 +70,43 @@ body {
 
 .yellow {
   background-color: #F8CB2E;
+}
+
+/* Media Queries */
+@media screen and (max-width: 815px) {
+  .container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 55%;
+  }
+
+  #level-title, #start, #restart {
+    font-size: 1.8rem;
+  }
+
+  .btn {
+    height: 100px;
+    width: 100px;
+  }
+
+}
+
+
+@media screen and (max-width: 573px) {
+
+  .container {
+    width: 70%;
+  }
+
+
+  #level-title, #start, #restart {
+    font-size: 1.4rem;
+  }
+
+  .btn {
+    height: 18vw;
+    width: 18vw;
+  }
+
 }
