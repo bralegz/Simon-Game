@@ -1,8 +1,8 @@
-var userClickedPattern = [];
-var gamePattern = [];
-var buttonColours = ["red", "blue", "green", "yellow"];
-var keyPressed = [];
-var level = 0;
+let userClickedPattern = [];
+let gamePattern = [];
+let buttonColours = ["red", "blue", "green", "yellow"];
+let keyPressed = [];
+let level = 0;
 
 // IDENTIFY CLICK ON START BUTTON.
 $(document).on("click", function (event) {
@@ -22,14 +22,14 @@ $(document).on("click", function (event) {
 // GAME START AND SOUND.
 
 function nextSequence() {
-    var randomNumber = Math.floor(Math.random() * 4)
-    var randomChosenColour = buttonColours[randomNumber];
+    let randomNumber = Math.floor(Math.random() * 4)
+    let randomChosenColour = buttonColours[randomNumber];
     gamePattern.push(randomChosenColour);
 
     $("#" + randomChosenColour).fadeOut(100).fadeIn(100);
 
     playSound();
-    var audio = new Audio("sounds/" + randomChosenColour + ".mp3");
+    let audio = new Audio("sounds/" + randomChosenColour + ".mp3");
     audio.play();
     // console.log(gamePattern);
 };
@@ -38,7 +38,7 @@ function nextSequence() {
 
 function playSound() {
     $(".btn").on("click", function () {
-        var audio = new Audio("sounds/" + this.id + ".mp3");
+        let audio = new Audio("sounds/" + this.id + ".mp3");
         audio.play();
     });
 }
@@ -56,7 +56,7 @@ function animatePress(currentColour) {
 // IDENTIFY THE CLICKED BUTTON. COMPARE GAME PATTERN AND USER PATTERN.
 
 $(".btn").on("click", function () {
-    var userChosenColour = this.id;
+    let userChosenColour = this.id;
     animatePress(userChosenColour);
 
     if ($("#start").hasClass("hidden")) {
@@ -80,7 +80,7 @@ $(".btn").on("click", function () {
                 console.log("bien")
             } else {
                 if ($("#start").hasClass("hidden")) {
-                    var audio = new Audio("sounds/wrong.mp3");
+                    let audio = new Audio("sounds/wrong.mp3");
                     audio.play();
                     $("#restart").removeClass("hidden");
                     $("#start").addClass("hidden");
@@ -90,7 +90,7 @@ $(".btn").on("click", function () {
                     }, 200);
                     $("#level-title").html("Game Over")
                     $("#restart").on("click", function () {
-                        var audio = new Audio("sounds/wrong.mp3");
+                        let audio = new Audio("sounds/wrong.mp3");
                         audio.play();
                         startOver();
                     });
@@ -103,7 +103,12 @@ $(".btn").on("click", function () {
 });
 
 function startOver() {
-    $(document).on("click", function () {
-        location.reload();
-    })
+    userClickedPattern = [];
+    gamePattern = [];
+    keyPressed = [];
+    level = 0;
+    $("#level-title").html("Simon Game");
+    $("#restart").addClass("hidden");
+    $("#start").removeClass("hidden");
+
 };
